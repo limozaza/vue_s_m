@@ -14,10 +14,13 @@
         <input type="text" placeholder="Votre Nom" v-model="votreNom"/> {{votreNom}}
         <hr/>
         <h2>{{title}}</h2>
-        <form v-on:submit="addTask($event)">
+        <form v-on:submit.prevent="addTask()">
             <input type="text" placeholder="Tache a faire" v-model="task"/>
             <button type="submit">Ajouter</button>
         </form>
+        <ul>
+            <li v-for="task in tasks">{{task}}</li>
+        </ul>
         
         
     </div>
@@ -34,8 +37,7 @@
                 tasks: []
             },
             methods: {
-                addTask: function(event){
-                    event.preventDefault();
+                addTask: function(){
                     this.tasks.push(this.task);
                     this.task = '';
                 }
