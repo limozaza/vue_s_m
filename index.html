@@ -14,8 +14,12 @@
         <input type="text" placeholder="Votre Nom" v-model="votreNom"/> {{votreNom}}
         <hr/>
         <h2>{{title}}</h2>
-        <input type="text" placeholder="Tache a faire" v-model="task"/>
-        <button v-on:click="addTask">Ajouter</button>
+        <form v-on:submit="addTask($event)">
+            <input type="text" placeholder="Tache a faire" v-model="task"/>
+            <button type="submit">Ajouter</button>
+        </form>
+        
+        
     </div>
     <script>
         new Vue({
@@ -30,7 +34,8 @@
                 tasks: []
             },
             methods: {
-                addTask: function(){
+                addTask: function(event){
+                    event.preventDefault();
                     this.tasks.push(this.task);
                     this.task = '';
                 }
