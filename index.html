@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Titre de la page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="vue.js"></script>
 </head>
@@ -24,7 +25,13 @@
             v-bind:class="{completed: task.done}"
             v-for="task in tasks"
             >
-                {{task.description}}
+                <span v-if="!task.isInEditMode">
+                    <i class="fa fa-edit" v-on:click="switchMode(task)"></i>{{task.description}}
+                </span>
+                <span v-else>
+                    <i class="fa fa-thumbs-o-up" v-on:click="switchMode(task)"></i>
+                    <input type="text" v-model="task.description"/>
+                </span>
             </li>
         </ul>
         
@@ -47,9 +54,13 @@
                     this.tasks.push({
                         id: Date.now(),
                         description: this.task,
-                        done: false
+                        done: false,
+                        isInEditMode: false
                     });
                     this.task = '';
+                },
+                switchMode: function(task){
+                    task.isInEditMode = !task.isInEditMode;
                 }
             }
         })
