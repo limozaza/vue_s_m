@@ -9,8 +9,13 @@
 <body>
     <div id="app">
         {{course}} -- {{date}}
-        <img v-bind:src="url"/>
+        <img v-bind:src="url" height="70px" width="70px"/>
+        <hr/>
         <input type="text" placeholder="Votre Nom" v-model="votreNom"/> {{votreNom}}
+        <hr/>
+        <h2>{{title}}</h2>
+        <input type="text" placeholder="Tache a faire" v-model="task"/>
+        <button v-on:click="addTask">Ajouter</button>
     </div>
     <script>
         new Vue({
@@ -19,7 +24,16 @@
                 course: 'Vue js 2',
                 date : Date.now(),
                 url: "https://vuejs.org/images/logo.png",
-                votreNom: ""
+                votreNom: "",
+                title: "A faire",
+                task: "",
+                tasks: []
+            },
+            methods: {
+                addTask: function(){
+                    this.tasks.push(this.task);
+                    this.task = '';
+                }
             }
         })
     </script>
