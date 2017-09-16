@@ -19,7 +19,11 @@
             <button type="submit">Ajouter</button>
         </form>
         <ul>
-            <li v-for="task in tasks">
+            <li 
+            v-on:click="task.done = !task.done"
+            v-bind:class="{completed: task.done}"
+            v-for="task in tasks"
+            >
                 {{task.description}}
             </li>
         </ul>
@@ -27,7 +31,7 @@
         
     </div>
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
                 course: 'Vue js 2',
