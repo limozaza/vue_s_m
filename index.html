@@ -10,6 +10,7 @@
     <div id="app">
         {{course}} -- {{date}}
         <img v-bind:src="url"/>
+        <input type="text" placeholder="Votre Nom" v-model="votreNom"/> {{votreNom}}
     </div>
     <script>
         new Vue({
@@ -17,7 +18,8 @@
             data: {
                 course: 'Vue js 2',
                 date : Date.now(),
-                url: "https://vuejs.org/images/logo.png"
+                url: "https://vuejs.org/images/logo.png",
+                votreNom: ""
             }
         })
     </script>
