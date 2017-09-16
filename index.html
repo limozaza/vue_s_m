@@ -9,13 +9,15 @@
 <body>
     <div id="app">
         {{course}} -- {{date}}
+        <img v-bind:src="url"/>
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
                 course: 'Vue js 2',
-                date : Date.now()
+                date : Date.now(),
+                url: "https://vuejs.org/images/logo.png"
             }
         })
     </script>
