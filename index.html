@@ -19,7 +19,9 @@
             <button type="submit">Ajouter</button>
         </form>
         <ul>
-            <li v-for="task in tasks">{{task}}</li>
+            <li v-for="task in tasks">
+                {{task.description}}
+            </li>
         </ul>
         
         
@@ -33,12 +35,16 @@
                 url: "https://vuejs.org/images/logo.png",
                 votreNom: "",
                 title: "A faire",
-                task: "",
+                task: null,
                 tasks: []
             },
             methods: {
                 addTask: function(){
-                    this.tasks.push(this.task);
+                    this.tasks.push({
+                        id: Date.now(),
+                        description: this.task,
+                        done: false
+                    });
                     this.task = '';
                 }
             }
