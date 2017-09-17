@@ -30,7 +30,7 @@
                 </span>
                 <span v-else>
                     <i class="fa fa-thumbs-o-up" v-on:click="switchMode(task)"></i>
-                    <input type="text" v-model="task.description"/>
+                    <input type="text" v-model="task.description" v-on:keyup.enter="switchMode(task)"/>
                 </span>
             </li>
         </ul>
