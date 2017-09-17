@@ -27,6 +27,7 @@
             >
                 <span v-if="!task.isInEditMode">
                     <i class="fa fa-edit" v-on:click="switchMode(task)"></i>{{task.description}}
+                    <i class="fa fa-trash-o" v-on:click="deleteTask(task)"></i>
                 </span>
                 <span v-else>
                     <i class="fa fa-thumbs-o-up" v-on:click="switchMode(task)"></i>
@@ -61,6 +62,11 @@
                 },
                 switchMode: function(task){
                     task.isInEditMode = !task.isInEditMode;
+                },
+                deleteTask: function(task){
+                    this.tasks = this.tasks.filter(function(t) {
+                        return t.id !== task.id;
+                    });
                 }
             }
         })
