@@ -11,13 +11,21 @@
 <body>
     <div id="app">
        <global-cmp></global-cmp>
+       <my-cmp></my-cmp>
+       <my-cmp></my-cmp>
     </div>
     <script>
         Vue.component('global-cmp',{
             template: '<div>Composent Global</div>'
         });
+        var myCmp = {
+            template: '<p>Composent local</p>'
+        }
         var vm = new Vue({
-            el: '#app'
+            el: '#app',
+            components: {
+                'my-cmp' : myCmp
+            }
         })
     </script>
 </body>
