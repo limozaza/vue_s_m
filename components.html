@@ -19,7 +19,17 @@
             template: '<div>Composent Global</div>'
         });
         var myCmp = {
-            template: '<p>Composent local</p>'
+            data: function(){
+                return {
+                favoriteNumber: Math.floor(Math.random()*10)
+                }
+            },
+            template: '<p>Composent local :: {{favoriteNumber}}<button v-on:click="refreshNumber">rafreshir</button></p>',
+            methods: {
+                refreshNumber: function(){
+                    this.favoriteNumber = Math.floor(Math.random()*10)
+                }
+            }
         }
         var vm = new Vue({
             el: '#app',
