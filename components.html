@@ -13,10 +13,17 @@
        <global-cmp></global-cmp>
        <my-cmp v-bind:msg="message"></my-cmp>
        <my-cmp msg="salut zazaza"></my-cmp>
+       <hr/>
+       <compo01 :name="nom"></compo01>
+
     </div>
     <script>
         Vue.component('global-cmp',{
             template: '<div>Composent Global</div>'
+        });
+        Vue.component('compo01',{
+            template: '<div>Bonjour {{name}}</div>',
+            props: ['name']
         });
         var myCmp = {
             data: function(){
@@ -31,14 +38,16 @@
                 }
             },
             props: ['msg']
-        }
+        }  
+
         var vm = new Vue({
             el: '#app',
             components: {
                 'my-cmp' : myCmp
             },
             data:{
-                message: 'Salam enfant'
+                message: 'Salam enfant',
+                nom: 'Boufares Zakaria'
             },
         })
     </script>

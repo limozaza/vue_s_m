@@ -17,17 +17,27 @@
             </li>
         </ul>
         <hr/>
-        <user-list v-bind:data="users"></user-list>
+        <user-list v-bind:data="users">
+        </user-list>
     </div>
     <script>
         Vue.component('user-list',{
             template: `<div>
                 <ul>
-                    <li v-for="user in data">{{user.name}}</li>
+                    <li v-for="user in data">
+                            <user-details v-bind:usr="user">
+                            </user-details>
+                    </li>
                 </ul>
             </div>`,
             props: ['data']
-        })
+        });
+        Vue.component('user-details',{
+            template: `<div>
+                id: {{usr.id}},   nom: {{usr.name}}
+            </div>`,
+            props: ['usr']
+        });
         var vm = new Vue({
             el: '#app',
             data: {
