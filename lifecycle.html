@@ -25,18 +25,28 @@
             template: `<div>
                 <ul>
                     <li v-for="user in data">
-                            <user-details v-bind:usr="user">
+                            <user-details v-bind:usr="user" v-on:accepter="registerUser(user)">
                             </user-details>
                     </li>
                 </ul>
             </div>`,
-            props: ['data']
+            props: ['data'],
+            methods: {
+                registerUser: function(user){
+                    console.log(user.id);
+                }  
+            }
         });
         Vue.component('user-details',{
             template: `<div>
-                id: {{usr.id}},   nom: {{usr.name}}
+                id: {{usr.id}},   nom: {{usr.name}} <button v-on:click="acceptInvitation">Accept</button>
             </div>`,
-            props: ['usr']
+            props: ['usr'],
+            methods: {
+                acceptInvitation: function(){
+                    this.$emit('accepter');
+                }  
+            }
         });
         var vm = new Vue({
             el: '#app',
