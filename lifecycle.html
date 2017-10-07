@@ -17,8 +17,10 @@
             </li>
         </ul>
         <hr/>
-        <user-list v-bind:data="users">
+        <user-list v-bind:data="users" v-bind:usersaccept="usersAccpet">
         </user-list>
+        <hr/>
+
     </div>
     <script>
         Vue.component('user-list',{
@@ -30,10 +32,10 @@
                     </li>
                 </ul>
             </div>`,
-            props: ['data'],
+            props: ['data','usersaccept'],
             methods: {
                 registerUser: function(user){
-                    console.log(user.id);
+                    this.usersaccept.push(user)
                 }  
             }
         });
@@ -53,7 +55,8 @@
             data: {
                 title: "Lifecycle hooks",
                 usersUrl:'https://jsonplaceholder.typicode.com/users',
-                users: []
+                users: [],
+                usersAccpet: []
             },
             //initialisation application
             //Avant larriver des datas
