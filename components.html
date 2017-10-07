@@ -15,6 +15,11 @@
        <my-cmp msg="salut zazaza"></my-cmp>
        <hr/>
        <compo01 :name="nom"></compo01>
+       <hr/>
+       <my-card>
+           <h3 slot="card-header">Mon titre</h3>
+           <p slot="card-body">Mon Body</p>
+       </my-card>
 
     </div>
     <script>
@@ -24,6 +29,9 @@
         Vue.component('compo01',{
             template: '<div>Bonjour {{name}}</div>',
             props: ['name']
+        });
+        Vue.component('my-card',{
+            template: '<div><slot name="card-header"></slot><slot name="card-body"></slot></div>'
         });
         var myCmp = {
             data: function(){
