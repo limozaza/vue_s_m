@@ -11,6 +11,7 @@
 <body>
     <div id="app">
        <h1>{{about | majuscule}}</h1>
+       <p>{{ this.contact }}</p>
     </div>
     <script>
      
@@ -19,11 +20,18 @@
         var vm = new Vue({
             el: '#app',
             data:{
-                about: "zakaria Boufares"
+                about: "zakaria Boufares",
+                email: "zakboite@gmail.com",
+                phone: "06 95 79 02 22"
             },
             filters: {
                 majuscule: function(value){
                     return value.toUpperCase()
+                }
+            },
+            computed: {
+                contact: function () {
+                    return 'email '+this.email+' Tél : '+this.phone;
                 }
             }
         })
