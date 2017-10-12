@@ -18,6 +18,11 @@
            <input type="text" placeholder="Votre email" v-model="emailForNewsLetter" />
            <button v-bind:disabled="emailAddressInvalid">S'inscrire</button>
        </div>
+       <div>
+           <h2>Votre avis</h2>
+           <input type="text" placeholder="Votre avis" v-model="opinion"/>
+           <span>{{opinionResult}}</span>
+       </div>
     </div>
     <script>
      
@@ -29,7 +34,9 @@
                 about: "zakaria Boufares",
                 email: "zakboite@gmail.com",
                 phone: "06 95 79 02 22",
-                emailForNewsLetter: ''
+                emailForNewsLetter: '',
+                opinion: "",
+                opinionResult: ""
             },
             filters: {
                 majuscule: function(value){
@@ -45,6 +52,16 @@
                         return true;
                     }else{
                         return false;
+                    }
+                }
+            },
+            watch: {
+                opinion: function(value){
+                    console.log(value)
+                    if(value === "zakaria"){
+                        this.opinionResult = "NO c'est pas bon"
+                    }else{
+                        this.opinionResult = ""
                     }
                 }
             }
