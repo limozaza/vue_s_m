@@ -12,6 +12,12 @@
     <div id="app">
        <h1>{{about | majuscule}}</h1>
        <p>{{ this.contact }}</p>
+       <hr/>
+       <div>
+           S'inscrire à une newletter: 
+           <input type="text" placeholder="Votre email" v-model="emailForNewsLetter" />
+           <button v-bind:disabled="emailAddressInvalid">S'inscrire</button>
+       </div>
     </div>
     <script>
      
@@ -22,7 +28,8 @@
             data:{
                 about: "zakaria Boufares",
                 email: "zakboite@gmail.com",
-                phone: "06 95 79 02 22"
+                phone: "06 95 79 02 22",
+                emailForNewsLetter: ''
             },
             filters: {
                 majuscule: function(value){
@@ -32,6 +39,13 @@
             computed: {
                 contact: function () {
                     return 'email '+this.email+' Tél : '+this.phone;
+                },
+                emailAddressInvalid: function(){
+                    if(this.emailForNewsLetter.length < 5){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
             }
         })
