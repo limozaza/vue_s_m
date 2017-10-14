@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vue.js"></script>
+  <script src="./iban.js"></script>
+</head>
+<body>
+    <div id="app">
+       <h1>{{about | majuscule}}</h1>
+       <p>{{ this.contact }}</p>
+       <hr/>
+       <div>
+           S'inscrire à une newletter: 
+           <input type="text" placeholder="Votre email" v-model="emailForNewsLetter" />
+           <button v-bind:disabled="emailAddressInvalid">S'inscrire</button>
+       </div>
+       <div>
+           <h2>Votre avis</h2>
+           <input type="text" placeholder="Votre avis" v-model="opinion"/>
+           <span>{{opinionResult}}</span>
+       </div>
+       <hr/>
+       <h3>Votre IBAN</h3>
+       <input type="text" placeholder="Votre IBAN" v-model="iban"/><span>{{ibanResult}}</span><br/>
+       <button v-bind:disabled="ibanValid">Valider</button>
+       <hr/>
+       <h3>Valider OTP</h3>
+       <input type="text" placeholder="Votre IBAN" v-model="iban"/><span>{{ibanResult}}</span><br/>
+       <button v-bind:disabled="ibanValid">Valider</button>
+    </div>
+    <script>
+       
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                about: "zakaria Boufares",
+                email: "zakboite@gmail.com",
+                phone: "06 95 79 02 22",
+                emailForNewsLetter: '',
+                opinion: "",
+                opinionResult: "",
+                iban: "",
+                ibanResult: ""
+            },
+            filters: {
+                majuscule: function(value){
+                    return value.toUpperCase()
+                }
+            },
+            computed: {
+                contact: function () {
+                    return 'email '+this.email+' Tél : '+this.phone;
+                },
+                emailAddressInvalid: function(){
+                    if(this.emailForNewsLetter.length < 5){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                ibanValid: function(){
+                    if(!IBAN.isValid(this.iban)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                
+            },
+            watch: {
+                opinion: function(value){
+                    console.log(value)
+                    if(value === "zakaria"){
+                        this.opinionResult = "NO c'est pas bon"
+                    }else{
+                        this.opinionResult = ""
+                    }
+                },
+                iban: function(value){
+                    console.log(value)
+                    if(!IBAN.isValid(value)){
+                        this.ibanResult = "IBAN pas correct"
+                    }else{
+                        this.ibanResult = ""
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
